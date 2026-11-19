@@ -59,7 +59,7 @@ CONFIG = dict(
     entity="Victor Tai (Tai Sing Thong, REN 26739) is a Johor Bahru real estate negotiator and Associate Leader at The Roof Realty (TRR), focusing on commercial and industrial property: shoplots, factories and warehouses. A former external auditor at Big 4 firm Ernst &amp; Young (EY), he explains property through numbers (rent, tax, loan and yield) and matches businesses to the space they actually need. He has been a TRR Multi Million Agent every year since 2023. He is co-founder of M-Fighters, the largest team in TRR nationwide as of 2026, and founder of The Worthy Group, which produces over RM10 million in sales commission a year. He shares JB property content on Facebook, Instagram, Xiaohongshu, TikTok, Douyin and YouTube.",
 )
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "victortai-site")
+OUT = os.path.join(HERE, "..", "site")
 PREV = os.path.join(HERE, "..", "preview")
 
 MEDIA = {}   # output rel path -> (source path, max width)
@@ -502,6 +502,7 @@ def tool(c):
   <p>{c.t(
     "Both options are measured over the same window: the waiting time plus one tenancy term. If you accept, the tenant moves in now and is assumed to renew at the same rent. If you wait, the unit earns nothing until the tenant at your expected rent arrives. Agent fee and service tax are deducted on both sides. Your instalment is paid either way, so it is left out of the comparison and shown separately. Interest is estimated at 70% of the instalment.",
     "两边用同样的时间长度来比：等待的时间加一个租约期。接 offer，租客现在就入住，假设到期后用同样租金续租。等的话，期望租金的租客出现之前，单位没有收入。两边都扣中介费和 SST。供期两边都要付，所以不放进比较，另外列出来。利息以供期的 70% 估算。")}</p>
+  <p>{c.t("New to this? Read the guide first:", "")} <a href="/guides/vacancy-cost-shop-factory-johor-bahru/">How much does an empty shop or factory really cost in Johor Bahru?</a></p>
   <p class="byline">{c.t("By", "作者")} Victor Tai (Tai Sing Thong), {REN(c.lang)}, The Roof Realty · {c.t("Updated", "更新")} {CONFIG["updated"]}</p>
 </section>
 <section>
@@ -651,6 +652,71 @@ for sl in AREAS:
     BUILDERS[k] = (lambda ss: (lambda c: area_page(c, ss)))(sl)
     META[("en", k)] = (f'Property for Sale and Rent in {AREAS[sl]["name"]}, Johor Bahru | Victor Tai',
                        f'Commercial and industrial units for sale and rent in {AREAS[sl]["name"]}, Johor Bahru, with asking prices, listed by Victor Tai, REN 26739.')
+
+# ---------- guides (question-led articles) ----------
+GUIDES = []   # (slug, title, description, published, builder)
+
+def guide_vacancy(c):
+    by = f'Victor Tai (Tai Sing Thong), {REN(c.lang)}, The Roof Realty · Updated {CONFIG["updated"]}'
+    ex = [("Tenant's offer", "RM5,000 a month"), ("Rent you hope for", "RM5,500 a month"),
+          ("Difference", "RM500 a month"), ("Lease", "3 years (36 months)"),
+          ("Extra income over the lease", "RM500 × 36 = RM18,000"),
+          ("Break-even waiting time", "RM18,000 ÷ RM5,500 ≈ 3.3 months")]
+    ledger = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in ex)
+    return f'''<section class="hero solo">
+  <p class="eyebrow">Guide for landlords</p>
+  <h1>How much does an empty shop or factory really cost in Johor Bahru?</h1>
+  <p class="lead">Every month a shop or factory sits empty, you lose the full month's rent plus your holding costs. If you turn down a tenant to wait for RM500 more a month on a 3-year lease, you only come out ahead if the better tenant arrives within about three months.</p>
+  <p class="byline">By {by}</p>
+</section>
+<section>
+  <h2>The mistake most landlords make.</h2>
+  <p>Landlords compare two rents: the offer in hand and the rent they hope to get. They forget the third number, which is time.</p>
+  <p>An empty unit earns nothing, but the costs keep running: loan interest, quit rent, assessment, service charges for stratified units, insurance and basic maintenance. An empty factory also starts to deteriorate.</p>
+</section>
+<section>
+  <h2>A simple way to calculate it.</h2>
+  <p><strong>Break-even waiting time (months) = (rent you hope for − rent offered) × lease months ÷ rent you hope for.</strong></p>
+  <p>Example, a terrace factory:</p>
+  <dl class="ledger">{ledger}</dl>
+  <p>If the RM5,500 tenant takes longer than about 3.3 months to appear, accepting RM5,000 today would have earned you more. That is before holding costs, which make the real break-even shorter still.</p>
+  <p class="note">These figures illustrate the method. They are not market rents. Use your own numbers.</p>
+</section>
+<section>
+  <h2>What changes the answer.</h2>
+  <ul class="steps">
+    <li><strong>Lease length.</strong> A longer lease makes a higher rent worth more, so you can afford to wait a little longer. A one-year lease rarely justifies waiting.</li>
+    <li><strong>How fast your type of unit rents out.</strong> A ground-floor shop on a busy road may rent in weeks. A large detached factory in a quieter industrial area can take many months. Ask an agent who handles that area what recent vacancy times have been.</li>
+    <li><strong>Free renovation period.</strong> Commercial and industrial tenants often ask for one to three months rent-free to fit out. Count it as a cost in the comparison.</li>
+    <li><strong>Tenant quality.</strong> A tenant who pays on time for three years is worth more than one who pays RM300 more and leaves after a year.</li>
+  </ul>
+</section>
+<section>
+  <h2>When holding out makes sense.</h2>
+  <ol class="steps">
+    <li>Your asking rent is supported by recent deals for similar units nearby, not just by listings.</li>
+    <li>The unit type is in short supply in that area.</li>
+    <li>You can carry the holding costs without strain.</li>
+  </ol>
+  <p>If none of these is true, the offer in hand is usually the better deal.</p>
+</section>
+<section>
+  <h2>Run your own numbers.</h2>
+  <p>The free <a href="{c.url("tool")}">vacancy cost calculator</a> runs this comparison for you, including free renovation months, agent fee and service tax.</p>
+  {cta(c, "Send Victor your unit and the offer", "", "Hi Victor, I read your guide on vacancy cost. I have a tenant offer for my unit and want a second opinion. My unit is at: ")}
+</section>'''
+
+GUIDES.append(("vacancy-cost-shop-factory-johor-bahru",
+               "How Much Does an Empty Shop or Factory Really Cost in Johor Bahru?",
+               "Holding out for higher rent can cost a JB landlord more than it earns. A simple formula for when to accept a tenant's offer, by Victor Tai (REN 26739).",
+               "2026-11-19", guide_vacancy))
+
+for slug, gtitle, gdesc, gdate, gfn in GUIDES:
+    k = "g:" + slug; PAGES.append(k); PATHS[k] = f"/guides/{slug}/"; BUILDERS[k] = gfn
+    META[("en", k)] = (f"{gtitle} | Victor Tai", gdesc)
+    EXTRA_LD[k] = {"@context": "https://schema.org", "@type": "Article", "headline": gtitle, "description": gdesc,
+                   "url": CONFIG["domain"] + PATHS[k], "datePublished": gdate, "dateModified": CONFIG["updated"],
+                   "inLanguage": "en", "author": {"@id": CONFIG["domain"] + "/#victor-tai", "@type": "Person", "name": "Victor Tai"}}
 
 def person_ld():
     names = ["Tai Sing Thong"] + ([CONFIG["zh_name"]] if CONFIG["zh_name"] else [])
