@@ -1,0 +1,115 @@
+def home(c):
+    facts = [
+        ("Name", f"Victor Tai (Tai Sing Thong) · {ZHNAME(c.lang)}"),
+        ("Registration", REN(c.lang)),
+        ("Agency", "The Roof Realty (TRR)"),
+        ("Focus", "Shoplots, factories, warehouses"),
+        ("Based in", "Johor Bahru, Johor, Malaysia"),
+        ("Background", "Accounting graduate, former EY auditor"),
+        ("Recognition", "TRR Multi Million Agent (MMA), 2025"),
+        ("Team", "Co-founder, The Worthy Group"),
+        ("WhatsApp", f'<a href="{wa("Hi Victor, I found you through your website.")}">{CONFIG["phone_display"]}</a>'),
+    ]
+    rows = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in facts)
+    doors = [
+        ("I need a factory, warehouse or shop", "Business owners",
+         "Send the requirement in one message: type, area, size and power. I come back with units that fit how the business runs.",
+         "space", "Send your requirement"),
+        ("I own a shoplot or factory", "Owners and landlords",
+         "A tenant has made an offer below your asking rent. Work out in two minutes whether accepting or waiting leaves you with more.",
+         "tool", "Open the vacancy cost calculator"),
+        ("I want to become a property agent", "Career",
+         "The Worthy Group is a TRR sales team in Johor Bahru run on shared systems, with a commercial and industrial learning route.",
+         "join", "See how the team works"),
+    ]
+    doors_html = "".join(
+        f'<a class="door" href="{c.url(p)}"><span class="eyebrow">{who}</span><h3>{h}</h3><p>{d}</p><span class="go">{go} →</span></a>'
+        for h, who, d, p, go in doors)
+    nums = [("Rent", "Asking rent against what units nearby are fetching."),
+            ("Tax", "Which rental expenses are generally deductible."),
+            ("Loan", "Instalment, and how much of it is interest."),
+            ("Yield", "Net return after vacancy, fees and holding cost.")]
+    nums_html = "".join(f"<li><b>{h}</b><span>{p}</span></li>" for h, p in nums)
+    areas = ["Iskandar Puteri", "Eco Botanic", "Medini", "Tampoi", "Johor Bahru", "Permas Jaya", "Mount Austin", "Pelangi", "Sutera"]
+    areas_html = "".join(f"<li>{a}</li>" for a in areas)
+    return f'''<section class="hero">
+  <div>
+    <p class="eyebrow">Victor Tai (Tai Sing Thong) · Johor Bahru</p>
+    <h1>Shoplots, factories and warehouses in Johor Bahru, worked out in numbers</h1>
+    <p class="lead">Victor Tai (Tai Sing Thong) is a Johor Bahru real estate negotiator with The Roof Realty, focusing on commercial and industrial property: shoplots, factories and warehouses. An accounting graduate and former EY staff, he explains property through numbers (rent, tax, loan and yield) and matches businesses to the space they actually need. He co-founded The Worthy Group, a TRR sales team.</p>
+    {cta(c, "WhatsApp Victor", "")}
+    <p class="trust">{REN(c.lang)} · The Roof Realty · TRR Multi Million Agent 2025 · Former EY auditor</p>
+  </div>
+  {portrait(c)}
+</section>
+<section>
+  <h2>What brings you here?</h2>
+  <div class="doors">{doors_html}</div>
+</section>
+<section>
+  <h2>Four numbers before any decision</h2>
+  <ul class="nums">{nums_html}</ul>
+</section>
+<section>
+  <h2>At a glance</h2>
+  <dl class="ledger">{rows}</dl>
+</section>
+<section>
+  <h2>Areas covered</h2>
+  <ul class="chips">{areas_html}</ul>
+</section>'''
+
+def space(c):
+    checks = [
+        ("Power supply", "List the machines and their load first. A unit with too little supply means an upgrade application, and that costs both money and weeks."),
+        ("Floor loading", "Racking, heavy machines and stacked pallets all put weight on the slab. Ask what the floor was designed to carry."),
+        ("Clear height", "Height decides how many racking levels fit and whether an overhead crane is possible."),
+        ("Loading and access", "Check the loading bay, the door size, and whether a 40-foot container can turn into the compound."),
+        ("Zoning and licence", "The industrial category of the land has to match your activity. Confirm with the local council before signing."),
+        ("Location", "Measure the drive to your customers, suppliers, workers, the ports and the two road links to Singapore."),
+    ]
+    checks_html = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in checks)
+    opt = lambda xs: "".join(f"<option>{x}</option>" for x in xs)
+    return f'''<section class="hero solo">
+  <div>
+    <p class="eyebrow">For business owners</p>
+    <h1>Find a factory, warehouse or shoplot in Johor Bahru that fits how your business runs</h1>
+    <p class="lead">A cheap unit that cannot power your machines or take your lorries is an expensive mistake. Tell me what the operation needs and I will shortlist units that fit, with the full cost of each laid out side by side.</p>
+    <p class="trust">Victor Tai (Tai Sing Thong) · {REN(c.lang)} · The Roof Realty</p>
+  </div>
+</section>
+<section class="brief">
+  <form class="panel" id="brief-form" autocomplete="off">
+    <div class="grp">Your requirement</div>
+    <div class="row wide"><label for="brief-type">Property type</label>
+      <select id="brief-type">{opt(["Factory", "Warehouse", "Shoplot", "Industrial land"])}</select></div>
+    <div class="row wide"><label for="brief-deal">Rent or buy</label>
+      <select id="brief-deal">{opt(["Rent", "Buy", "Either"])}</select></div>
+    <div class="row wide"><label for="brief-area">Preferred area</label>
+      <input id="brief-area" type="text" placeholder="e.g. Tampoi, Senai, Pasir Gudang"></div>
+    <div class="row wide"><label for="brief-size">Size needed</label>
+      <input id="brief-size" type="text" placeholder="e.g. 10,000 sq ft built-up"></div>
+    <div class="row wide"><label for="brief-note">Business and special needs <span class="opt">optional</span></label>
+      <input id="brief-note" type="text" placeholder="e.g. food processing, 200A, container access"></div>
+    <a class="btn block" id="brief-send" href="{wa("Hi Victor, I found you through your website. I am looking for a commercial or industrial property in Johor Bahru.")}">Send on WhatsApp</a>
+    <p class="hint">Opens WhatsApp with your requirement written out. Nothing is stored on this site. Or message {CONFIG["phone_display"]} directly.</p>
+  </form>
+  <div class="results">
+    <h2 class="plain">What happens next</h2>
+    <ol class="steps">
+      <li>You send the requirement. Four lines are enough to start.</li>
+      <li>I reply with units that fit, and for each one the rent or price, deposits and the likely set-up cost.</li>
+      <li>We view the short list together, then negotiate terms on the one that works.</li>
+    </ol>
+  </div>
+</section>
+<section>
+  <h2>Six things to check before you sign for a factory or warehouse</h2>
+  <dl class="ledger">{checks_html}</dl>
+</section>
+<section>
+  <h2>Compare the full cost, not only the rent</h2>
+  <p>Two units with the same monthly rent can cost very different amounts to occupy. Before choosing, add up the rent, the security and utility deposits, stamp duty on the tenancy, renovation and power upgrades, and the cost of reinstating the unit when you leave. I put these in one table for every unit on your short list.</p>
+  <p class="byline">By Victor Tai (Tai Sing Thong), {REN(c.lang)}, The Roof Realty · Updated {CONFIG["updated"]}</p>
+</section>'''
+

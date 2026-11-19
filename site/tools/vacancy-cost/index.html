@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vacancy Cost Calculator: Accept the Tenant Offer or Wait? | Victor Tai</title>
+<meta name="description" content="Free calculator for landlords in Malaysia: compare accepting a tenant&#x27;s offer now with waiting for your expected rent, after vacancy, agent fee and service tax.">
+<link rel="canonical" href="https://victortai.my/tools/vacancy-cost/">
+<meta property="og:type" content="website"><meta property="og:title" content="Vacancy Cost Calculator: Accept the Tenant Offer or Wait? | Victor Tai">
+<meta property="og:description" content="Free calculator for landlords in Malaysia: compare accepting a tenant&#x27;s offer now with waiting for your expected rent, after vacancy, agent fee and service tax."><meta property="og:url" content="https://victortai.my/tools/vacancy-cost/">
+<meta name="author" content="Victor Tai (Tai Sing Thong)">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Vacancy Cost Calculator: Accept the Tenant Offer or Wait?", "url": "https://victortai.my/tools/vacancy-cost/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "MYR"}, "author": {"@id": "https://victortai.my/#victor-tai"}, "dateModified": "2026-11-19"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://victortai.my/#victor-tai", "name": "Victor Tai", "alternateName": ["Tai Sing Thong"], "url": "https://victortai.my/", "jobTitle": "Real Estate Negotiator and Associate Leader", "description": "Victor Tai (Tai Sing Thong, REN 26739) is a Johor Bahru real estate negotiator and Associate Leader at The Roof Realty (TRR), focusing on commercial and industrial property: shoplots, factories and warehouses. A former external auditor at Big 4 firm Ernst & Young (EY), he explains property through numbers (rent, tax, loan and yield) and matches businesses to the space they actually need. He has been a TRR Multi Million Agent every year since 2023. He is co-founder of M-Fighters, the largest team in TRR nationwide as of 2026, and founder of The Worthy Group, which produces over RM10 million in sales commission a year. He shares JB property content on Facebook, Instagram, Xiaohongshu, TikTok, Douyin and YouTube.", "worksFor": {"@type": "RealEstateAgent", "name": "The Roof Realty", "address": {"@type": "PostalAddress", "addressLocality": "Johor Bahru", "addressRegion": "Johor", "addressCountry": "MY"}}, "memberOf": [{"@type": "Organization", "name": "M-Fighters"}, {"@type": "Organization", "name": "The Worthy Group", "url": "https://victortai.my/join/"}], "alumniOf": {"@type": "Organization", "name": "Ernst & Young (EY)"}, "award": "TRR Multi Million Agent, every year since 2023", "telephone": "+60177757229", "address": {"@type": "PostalAddress", "addressLocality": "Johor Bahru", "addressRegion": "Johor", "addressCountry": "MY"}, "knowsAbout": ["Commercial property in Johor Bahru", "Industrial property in Johor Bahru", "Shoplots", "Factories", "Warehouses"], "knowsLanguage": ["zh", "en"], "sameAs": ["https://www.facebook.com/share/1Xb4AGVCfv/", "https://www.facebook.com/200843523787654", "https://www.instagram.com/victor_lin_dao/", "https://www.tiktok.com/@victortai92", "https://www.youtube.com/@VictorLinDao92", "https://xhslink.cn/m/2DWDDkfRTQM", "https://www.douyin.com/user/MS4wLjABAAAAfKpoUUaOoF7L4MM144zqRURAXpMu5CcbGpF7_7wQWyM"], "identifier": "REN 26739", "image": "https://victortai.my/assets/victor.jpg"}</script>
+</head>
+<body>
+<div class="page">
+<header class="top">
+  <a class="brand" href="/">Victor Tai</a>
+  <nav aria-label="Main"><a href="/units/">Units</a><a href="/find-factory-warehouse-johor-bahru/">Find space</a><a href="/tools/vacancy-cost/" aria-current="page">For landlords</a><a href="/about/">About</a><a href="/join/">Join the team</a></nav>
+  <a class="navbtn" href="https://wa.me/60177757229?text=Hi%20Victor%2C%20I%20found%20you%20through%20your%20website.">Let's talk</a>
+  
+</header>
+<main>
+<section class="hero solo">
+  <div>
+    <p class="eyebrow">Tool for landlords</p>
+    <h1>Should you accept this tenant offer?</h1>
+    <p class="lead">Waiting for a higher rent costs you the months the unit sits empty. This calculator compares taking the offer now with waiting for your expected rent over the same period. The figures shown are samples. Replace them with your own unit.</p>
+  </div>
+</section>
+<section class="calc" data-calc="en">
+  <form class="panel" id="en-form" autocomplete="off">
+    <div class="grp">Rental</div>
+    <div class="row"><label for="en-offer">Tenant offer</label><div class="field"><span>RM</span><input id="en-offer" inputmode="decimal" value="1900"></div></div>
+    <div class="row"><label for="en-expect">Expected rental</label><div class="field"><span>RM</span><input id="en-expect" inputmode="decimal" value="2200"></div></div>
+    <div class="row"><label for="en-freeO">Free renovation period requested</label><div class="field"><input id="en-freeO" inputmode="decimal" value="0.5"><span>mth</span></div></div>
+    <div class="grp">Market for your expected rent</div>
+    <p class="hint">At your expected rent, how long until it gets rented?</p>
+    <div class="mkt"><label><input type="radio" name="en-mkt" id="en-m1" value="1"><span class="t">Hot</span><span class="m">1 month vacant</span><span class="d">Tenants competing</span><span class="badge" id="en-b1"></span></label><label><input type="radio" name="en-mkt" id="en-m3" value="3" checked><span class="t">Moderate</span><span class="m">3 months vacant</span><span class="d">A few other units</span><span class="badge" id="en-b3"></span></label><label><input type="radio" name="en-mkt" id="en-m6" value="6"><span class="t">Weak</span><span class="m">6 months vacant</span><span class="d">Many units competing</span><span class="badge" id="en-b6"></span></label><label><input type="radio" name="en-mkt" id="en-m12" value="12"><span class="t">Very weak</span><span class="m">12 months vacant</span><span class="d">Almost no tenants</span><span class="badge" id="en-b12"></span></label></div>
+    <div class="grp">Costs</div>
+    <div class="row"><label for="en-inst">Monthly instalment</label><div class="field"><span>RM</span><input id="en-inst" inputmode="decimal" value="2100"></div></div>
+    <div class="hint" id="en-intHint"></div>
+    <div class="row"><label for="en-fee">Agent fee (months of rent)</label><div class="field"><input id="en-fee" inputmode="decimal" value="1"><span>mth</span></div></div>
+    <div class="row"><label for="en-sst">Service tax on agent fee</label><div class="field"><input id="en-sst" inputmode="decimal" value="8"><span>%</span></div></div>
+    <div class="row"><label for="en-term">Tenancy term</label><div class="field"><input id="en-term" inputmode="decimal" value="12"><span>mth</span></div></div>
+  </form>
+  <div class="results">
+    <div class="verdict" id="en-verdict"><div class="big" id="en-vBig"></div><p id="en-vSub"></p></div>
+    <div class="panel">
+      <div class="cost"><span>Instalment you pay while vacant</span><b class="neg" id="en-cCash"></b></div>
+      <div class="cost"><span>Of which interest (money lost for good)</span><b class="neg" id="en-cInt"></b></div>
+    </div>
+    <div class="panel"><div class="scroll"><table id="en-tbl"></table></div><p class="note" id="en-tNote"></p></div>
+    <button type="button" id="en-copyBtn"></button>
+    <textarea id="en-copyOut" readonly aria-hidden="true" tabindex="-1"></textarea>
+  </div>
+</section>
+<section>
+  <h2>How the comparison works</h2>
+  <p>Both options are measured over the same window: the waiting time plus one tenancy term. If you accept, the tenant moves in now and is assumed to renew at the same rent. If you wait, the unit earns nothing until the tenant at your expected rent arrives. Agent fee and service tax are deducted on both sides. Your instalment is paid either way, so it is left out of the comparison and shown separately. Interest is estimated at 70% of the instalment.</p>
+  <p class="byline">By Victor Tai (Tai Sing Thong), REN 26739, The Roof Realty · Updated 2026-11-19</p>
+</section>
+<section>
+  <h2>Want a second pair of eyes on your numbers?</h2>
+  <p>Send me the unit, the offer and your asking rent. I will check the calculation against what similar units nearby are fetching.</p>
+  <p class="cta"><a class="btn" href="https://wa.me/60177757229?text=Hi%20Victor%2C%20I%20used%20the%20vacancy%20cost%20calculator%20on%20your%20website.%20Can%20you%20check%20my%20numbers%3F%20My%20unit%20is%20at%3A%20">Send Victor your unit</a>
+  <span class="num">+6017-775 7229</span></p>
+</section>
+</main>
+<footer class="foot">
+  <p><strong>Victor Tai (Tai Sing Thong)</strong> · REN 26739 · The Roof Realty · Johor Bahru, Malaysia</p>
+  <p>WhatsApp <a href="https://wa.me/60177757229" rel="me">+6017-775 7229</a></p>
+  <p class="socials"><a href="https://www.facebook.com/share/1Xb4AGVCfv/" rel="me">Facebook</a> · <a href="https://www.facebook.com/200843523787654" rel="me">Facebook Page</a> · <a href="https://www.instagram.com/victor_lin_dao/" rel="me">Instagram</a> · <a href="https://www.tiktok.com/@victortai92" rel="me">TikTok</a> · <a href="https://www.youtube.com/@VictorLinDao92" rel="me">YouTube</a> · <a href="https://xhslink.cn/m/2DWDDkfRTQM" rel="me">Xiaohongshu</a> · <a href="https://www.douyin.com/user/MS4wLjABAAAAfKpoUUaOoF7L4MM144zqRURAXpMu5CcbGpF7_7wQWyM" rel="me">Douyin</a></p>
+  <p class="small">Figures on this site are for general reference. Confirm tax and loan matters with your tax agent and banker. Last updated 2026-11-19.</p>
+</footer>
+<a class="wa-float" href="https://wa.me/60177757229?text=Hi%20Victor%2C%20I%20found%20you%20through%20your%20website.">WhatsApp Victor</a>
+</div>
+<script src="/assets/calc.js"></script><script>initCalc("en")</script>
+</body>
+</html>

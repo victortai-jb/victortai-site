@@ -1,0 +1,88 @@
+AREAS = [
+    ("Tampoi / Tebrau", "JB city", "Close to Johor Bahru city centre"),
+    ("Senai / Kulai", "Airport side", "Near Senai International Airport"),
+    ("Pasir Gudang / Tanjung Langsat", "Port side", "Near Johor Port"),
+    ("Iskandar Puteri / Gelang Patah", "Second Link", "Near the Second Link to Tuas, Singapore"),
+    ("Tanjung Pelepas", "Port side", "Near the Port of Tanjung Pelepas"),
+    ("Ulu Tiram / Desa Cemerlang", "East JB", "East of the city along Jalan Kota Tinggi"),
+]
+SERVICES = [
+    ("Factory and warehouse rental", "Units shortlisted by power supply, floor loading, height and lorry access, with the full move-in cost laid out."),
+    ("Buying factories and industrial land", "Price, loan, zoning and yield worked out before you commit."),
+    ("Shoplots for your business", "Frontage, traffic and what similar shops nearby pay in rent."),
+    ("Landlords: rent out or sell", "Pricing against nearby deals, and the numbers on accepting an offer or waiting."),
+]
+
+def listing_card(l):
+    return (f'<article class="lcard"><div class="ltag">{l["deal"]} · {l["area"]}</div><h3>{l["title"]}</h3>'
+            f'<p class="lspec">{l["size"]}</p><p class="lprice">{l["price"]}</p>'
+            f'<a class="textlink" href="{wa("Hi Victor, I saw this on your website: " + l["title"] + ". Is it still available?")}">Ask about this unit ›</a></article>')
+
+def home(c):
+    stats = [("RM10M+", "sales commission a year", "The Worthy Group, founded by Victor"),
+             ("Since 2023", "TRR Multi Million Agent", "every year"),
+             ("Big 4", "former external auditor", "Ernst &amp; Young (EY)"),
+             ("Largest", "team in TRR nationwide", "M-Fighters, co-founded by Victor (2026)")]
+    stats_html = "".join(f'<div class="stat"><b>{n}</b><span>{a}</span><small>{b}</small></div>' for n, a, b in stats)
+    areas_html = "".join(
+        f'<a class="area" href="{wa(f"Hi Victor, I found you through your website. I am looking for a factory or warehouse in {n}.")}">'
+        f'<span class="eyebrow">{tag}</span><h3>{n}</h3><p>{d}</p><span class="go">See units here ›</span></a>'
+        for n, tag, d in AREAS)
+    if CONFIG["listings"]:
+        listings = f'''<section id="listings">
+  <h2>Latest units.</h2>
+  <div class="lgrid">{"".join(listing_card(l) for l in CONFIG["listings"])}</div>
+</section>'''
+    elif c.preview:
+        listings = f'''<section id="listings">
+  <h2>Latest units.</h2>
+  <div class="lgrid"><article class="lcard"><h3>{todo("Listings go here")}</h3><p class="lspec">6 to 8 factory, warehouse and land cards with size, price and a WhatsApp button. Waiting for Victor to choose which listings may be shown publicly.</p></article></div>
+</section>'''
+    else:
+        listings = ""
+    svc_html = "".join(f"<article><h3>{h}</h3><p>{p}</p></article>" for h, p in SERVICES)
+    if CONFIG["reviews"]:
+        rev = "".join(f'<figure class="review"><blockquote>{q}</blockquote><figcaption>{who}</figcaption></figure>' for q, who in CONFIG["reviews"])
+        reviews = f'<section><h2>What clients say.</h2><div class="reviews">{rev}</div></section>'
+    elif c.preview:
+        reviews = f'<section><h2>What clients say.</h2><div class="reviews"><figure class="review"><blockquote>{todo("Real client reviews go here")}</blockquote><figcaption>2 to 4 reviews in the client\'s own words, with their business type. Hidden until Victor provides them.</figcaption></figure></div></section>'
+    else:
+        reviews = ""
+    return f'''<section class="hero solo">
+  <p class="eyebrow">Victor Tai · Johor Bahru</p>
+  <h1>Factories, warehouses and industrial land in Johor Bahru.</h1>
+  <p class="lead">Rent or buy, matched to how your business runs. Every unit worked out in numbers by a former Big 4 auditor.</p>
+  <p class="cta"><a class="btn" href="#listings">Browse units</a><a class="textlink" href="{wa("Hi Victor, I found you through your website.")}">WhatsApp Victor ›</a></p>
+  <p class="trust">{REN(c.lang)} · The Roof Realty</p>
+</section>
+<section>
+  <h2>Search by area.</h2>
+  <div class="areas">{areas_html}</div>
+</section>
+{listings}
+<section>
+  <div class="stats">{stats_html}</div>
+</section>
+<section>
+  <h2>How I can help.</h2>
+  <div class="cols two">{svc_html}</div>
+  <p class="cta"><a class="textlink" href="{c.url("space")}">Send your requirement ›</a><a class="textlink" href="{c.url("tool")}">Landlord calculator ›</a></p>
+</section>
+{reviews}
+<section>
+  <div class="split">
+    {portrait(c)}
+    <div>
+      <p class="eyebrow">About Victor</p>
+      <h2 class="left">The person behind the numbers.</h2>
+      <p>{CONFIG["entity"]}</p>
+      <p><a class="textlink" href="{c.url("about")}">More about Victor ›</a></p>
+    </div>
+  </div>
+</section>
+<section class="dark">
+  <h2>Let's talk.</h2>
+  <p class="lead center">Tell me the space you need, or the unit you want to let. I reply on WhatsApp.</p>
+  <p class="cta"><a class="btn" href="{wa("Hi Victor, I found you through your website.")}">WhatsApp Victor</a><span class="phone">{CONFIG["phone_display"]}</span></p>
+</section>'''
+
