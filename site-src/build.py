@@ -84,19 +84,6 @@ def unit_photos(u):
             if files: return [(os.path.join(d, f), f"media/units/{u['slug']}/{i+1}.jpg") for i, f in enumerate(files)]
     return []
 
-HERO_PICS = [  # (photo folder, file, caption) — shop, office, factory, to match the headline
-    ("eibo6ots0b44lrbtmplp", "4.jpg", "Shop"),
-    ("xw9u87xyrdzm8m95r2qu", "01.jpg", "Office"),
-    ("fls5eocg4wd4qoonx5gt", "1.jpg", "Factory"),
-]
-def hero_pics(c):
-    out = []
-    for i, (folder, f, cap) in enumerate(HERO_PICS):
-        src = os.path.join(HERE, "photos", folder, f)
-        if os.path.exists(src):
-            out.append(f'<figure class="hp hp{i}"><img src="{media(c, src, f"media/hero/{i+1}.jpg", 1400 if i == 2 else 900, 74)}" alt="{cap} in Johor Bahru" {"fetchpriority=\"high\"" if i == 2 else "loading=\"lazy\""}><figcaption>{cap}</figcaption></figure>')
-    return f'<div class="heropics">{"".join(out)}</div>' if out else ""
-
 def todo(label):
     return f'<mark class="todo">{label}</mark>'
 
@@ -261,7 +248,6 @@ def home(c):
   <p class="lead">Commercial and industrial property to rent or buy, worked out in numbers by a former Big 4 auditor, and put on video in front of thousands of followers.</p>
   <p class="cta"><a class="btn" href="{c.url("units")}">Browse units</a><a class="textlink" href="{wa("Hi Victor, I found you through your website.")}">WhatsApp Victor ›</a></p>
   <p class="trust">{REN(c.lang)} · The Roof Realty</p>
-  {hero_pics(c)}
 </section>
 {listings}
 <section class="dark">
