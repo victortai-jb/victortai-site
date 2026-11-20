@@ -7,6 +7,8 @@ Edit CONFIG, run `python3 build.py`. Outputs:
 import base64
 import json, os, shutil, html
 from urllib.parse import quote
+import hashlib
+ASSET_V=hashlib.md5(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'site.css'),'rb').read()+open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'calc.js'),'rb').read()).hexdigest()[:8]
 
 # ---------- CONFIG: replace the TODO values, then rebuild ----------
 CONFIG = dict(
@@ -768,11 +770,11 @@ def real_page(lang, page):
                 "offers": {"@type": "Offer", "price": "0", "priceCurrency": "MYR"},
                 "author": {"@id": CONFIG["domain"] + "/#victor-tai"}, "dateModified": CONFIG["updated"]}, person_ld()]
     ld = "".join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in lds)
-    calc = f'<script src="/assets/calc.js"></script><script>initCalc("{lang}")</script>' if page == "tool" else ""
+    calc = f'<script src="/assets/calc.js?v={ASSET_V}"></script><script>initCalc("{lang}")</script>' if page == "tool" else ""
     if page in ("home", "units"):
-        calc = '<script src="/assets/calc.js"></script><script>initFilter();initTabs();initVideos()</script>'
+        calc = f'<script src="/assets/calc.js?v={ASSET_V}"></script><script>initFilter();initTabs();initVideos()</script>'
     if page == "space":
-        calc = '<script src="/assets/calc.js"></script><script>initBrief()</script>'
+        calc = f'<script src="/assets/calc.js?v={ASSET_V}"></script><script>initBrief()</script>'
     return f'''<!DOCTYPE html>
 <html lang="{"zh-Hans" if lang == "zh" else "en"}">
 <head>
@@ -784,7 +786,7 @@ def real_page(lang, page):
 <meta property="og:description" content="{html.escape(desc)}"><meta property="og:url" content="{canon}">
 <meta name="author" content="Victor Tai (Tai Sing Thong)">
 {FONTS}
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v={ASSET_V}">
 {ld}
 </head>
 <body>
