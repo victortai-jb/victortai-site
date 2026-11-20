@@ -12,7 +12,7 @@ from urllib.parse import quote
 CONFIG = dict(
     domain="https://victortai.my",   # TODO confirm after buying the domain
     ren="REN 26739",
-    zh_name=None,                        # TODO Chinese-character name
+    zh_name="戴燊通",
     photo="assets/victor.jpg",          # from Drive "_profile_Victor_Tai.jpg" (19 Nov 2026)
     phone_display="+6017-775 7229",
     wa="https://wa.me/60177757229",
@@ -119,7 +119,7 @@ class Ctx:
 # ---------- shared chrome ----------
 def header(c, page):
     nav = [("units", "Units"), ("space", "Find space"), ("tool", "For landlords"), ("about", "About"), ("join", "Join the team")]
-    navwa = f'<a class="navbtn" href="{wa("Hi Victor, I found you through your website.")}">Let\'s talk</a>'
+    navwa = f'<a class="navbtn" href="{wa("Hi Victor, I found you through your website.")}">Ask VT</a>'
     cur = ' aria-current="page"'
     links = "".join(
         f'<a href="{c.url(p)}"{cur if p == page else ""}>{label}</a>' for p, label in nav)
@@ -242,12 +242,15 @@ def home(c):
         reviews = f'<section><h2>What clients say.</h2><div class="reviews"><figure class="review"><blockquote>{todo("Real client reviews go here")}</blockquote><figcaption>2 to 4 reviews in the client\'s own words, with their business type. Hidden until Victor provides them.</figcaption></figure></div></section>'
     else:
         reviews = ""
-    return f'''<section class="hero solo">
-  <p class="eyebrow">Victor Tai · Property agent and creator · Johor Bahru</p>
-  <h1>Shops, offices, factories and warehouses in Johor Bahru.</h1>
-  <p class="lead">Commercial and industrial property to rent or buy, worked out in numbers by a former Big 4 auditor, and put on video in front of thousands of followers.</p>
-  <p class="cta"><a class="btn" href="{c.url("units")}">Browse units</a><a class="textlink" href="{wa("Hi Victor, I found you through your website.")}">WhatsApp Victor ›</a></p>
-  <p class="trust">{REN(c.lang)} · The Roof Realty</p>
+    return f'''<section class="hero solo herome">
+  <div class="hm-text">
+    <p class="eyebrow">Victor Tai · Property agent and creator · Johor Bahru</p>
+    <h1>Shops, offices, factories and warehouses in Johor Bahru.</h1>
+    <p class="lead">Commercial and industrial property to rent or buy, worked out in numbers by a former Big 4 auditor, and put on video in front of thousands of followers.</p>
+    <p class="cta"><a class="btn" href="{c.url("units")}">Browse units</a><a class="textlink" href="{wa("Hi Victor, I found you through your website.")}">WhatsApp Victor ›</a></p>
+    <p class="trust">{REN(c.lang)} · The Roof Realty</p>
+  </div>
+  <figure class="hm-photo"><img src="{media(c, os.path.join(HERE, "assets", "victor-hero.jpg"), "media/victor-hero.jpg", 800, 84)}" alt="Victor Tai, commercial and industrial property agent in Johor Bahru" fetchpriority="high"></figure>
 </section>
 {listings}
 <section class="dark">
@@ -276,7 +279,7 @@ def home(c):
 {reviews}
 <section>
   <div class="split">
-    {portrait(c)}
+    <div class="portrait"><img src="{media(c, os.path.join(HERE, "assets", "victor-stage.jpg"), "media/victor-stage.jpg", 800, 84)}" alt="Victor Tai speaking on stage at a sales training" loading="lazy"></div>
     <div>
       <p class="eyebrow">About Victor</p>
       <h2 class="left">The person behind the numbers.</h2>
@@ -850,7 +853,7 @@ window.addEventListener("hashchange",show);show();initCalc("en");initBrief();ini
 .previewbar{{background:var(--flag);color:#3a2c00;font-size:13px;padding:8px 16px;text-align:center}}</style>
 </head>
 <body>
-<div class="previewbar">Preview · yellow marks are details still needed from Victor (Chinese name)</div>
+<div class="previewbar">Preview · not live yet</div>
 {views}
 <script>{js}</script>
 <script>{router}</script>
