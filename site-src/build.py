@@ -30,16 +30,18 @@ CONFIG = dict(
     ],
     # featured videos: Facebook reel id (personal profile), title, note. Cover image: assets/v/fb-<id>.jpg
     videos=[
-        ("1872628807039008", "Rental income tax: 6 costs landlords can deduct", "81K views"),
+        ("1872628807039008", "Rental income tax: 6 costs landlords can deduct", "606K views"),
+        ("1824036028830003", "Two US moves in one week: is Johor's data centre boom in trouble?", "151K views"),
+        ("1727335951849033", "RTS opens in 2027: RM9 billion of spending heads to JB", "398K views"),
         ("1121776210641222", "Ten years ago I audited factories in Pasir Gudang. Now I sell them", ""),
         ("29161843470163428", "A landlord lost RM45K waiting for a better rent", ""),
         ("1169916672199384", "Shop or factory not renting? Try this", ""),
         ("1082917634795487", "The JB industrial area nobody wanted is now selling", ""),
         ("1863496624679278", "90,000 sqft warehouse for rent in Pasir Gudang", ""),
-        ("1727335951849033", "RTS opens in 2027: RM9 billion of spending heads to JB", "7.6K views"),
-        ("2944809875894787", "KSL: the JB shopping street Singaporeans love", ""),
     ],
-    updated="2026-11-19",
+    updated="2026-11-22",
+    fb_followers="17K",   # Facebook personal profile followers, synced from facebook.com/singthong.victortai
+    stats_date="22 Nov 2026",
     listings=[   # Victor's own C&I listings from the Listing Hub (19 Nov 2026). Add Hub-selected ones here.
         dict(kind="ind", deal="For sale or rent", area="Ulu Tiram", title="Corner cluster factory, Taman Perindustrian Tropika",
              size="Land approx. 10,000 sqft · Built-up approx. 6,300 sqft · Medium industrial · 100 A · Freehold",
@@ -142,6 +144,16 @@ def footer(c):
                          "本站数字仅供参考。税务和贷款细节请向你的 tax agent 和银行确认。")} {c.t("Last updated", "最后更新")} {CONFIG["updated"]}.</p>
 </footer>
 <a class="wa-float" href="{wa("Hi Victor, I found you through your website.")}">WhatsApp Victor</a>'''
+
+def reads(c):
+    items = "".join(f'<li><a href="/guides/{s}/"><strong>{html.escape(t)}</strong><span>{html.escape(d.split(", by Victor")[0])}</span></a></li>'
+                    for s, t, d, dt, fn in sorted(GUIDES, key=lambda g: g[3], reverse=True))
+    return f'''<section id="read">
+  <p class="eyebrow">Read</p>
+  <h2>Notes for owners.</h2>
+  <p class="rsub">The ideas from my videos, written out properly.</p>
+  <ul class="reads">{items}</ul>
+</section>'''
 
 def cta(c, text_en, text_zh, msg="Hi Victor, I found you through your website."):
     return f'''<p class="cta"><a class="btn" href="{wa(msg)}">{c.t(text_en, text_zh)}</a>
@@ -260,15 +272,16 @@ def home(c):
   <h2>An agent with an audience.</h2>
   <p class="lead center">Most agents post a listing and wait. I put property on video, in front of business owners, landlords and investors who already follow my numbers on six platforms.</p>
   <div class="cstats">
-    <div><b>500K</b><span>views on one video, on rental tax deductions</span></div>
+    <div><b>600K</b><span>views on one video, on rental tax deductions</span></div>
     <div><b>300K+</b><span>Facebook views in 28 days</span></div>
-    <div><b>16K+</b><span>Facebook followers</span></div>
+    <div><b>{CONFIG["fb_followers"]}</b><span>Facebook followers</span></div>
     <div><b>6</b><span>platforms, in Mandarin and English</span></div>
   </div>
   <p class="cta"><a class="btn" href="{wa("Hi Victor, I found you through your website. I would like to list my unit with you.")}">List your unit with Victor</a></p>
-  <p class="note light">Facebook views and followers from Victor's Creator Dashboard, 22 Oct to 19 Nov 2026.</p>
+  <p class="note light">Facebook figures from Victor's profile and Creator Dashboard, updated {CONFIG["stats_date"]}.</p>
 </section>
 {videos}
+{reads(c)}
 {by_area}
 <section>
   <div class="stats">{stats_html}</div>
@@ -715,6 +728,56 @@ GUIDES.append(("vacancy-cost-shop-factory-johor-bahru",
                "How Much Does an Empty Shop or Factory Really Cost in Johor Bahru?",
                "Holding out for higher rent can cost a JB landlord more than it earns. A simple formula for when to accept a tenant's offer, by Victor Tai (REN 26739).",
                "2026-11-19", guide_vacancy))
+
+def guide_datacentre(c):
+    by = f'Victor Tai (Tai Sing Thong), {REN(c.lang)}, The Roof Realty · Published 22 Nov 2026'
+    return f'''<section class="hero solo">
+  <p class="eyebrow">Market note for landowners</p>
+  <h1>Two US moves in one week. What do they mean for Johor industrial land?</h1>
+  <p class="lead">In the week of 16 November 2026 the United States tightened exports of advanced AI chips to Malaysia, and President Trump spoke about taxing US companies that build data centres abroad. Johor's data centre boom is not over, but not every piece of industrial land is affected the same way. It depends on which of three kinds of land you hold.</p>
+  <p class="byline">By {by}</p>
+</section>
+<section>
+  <h2>The two moves.</h2>
+  <ol class="steps">
+    <li><strong>Chip export licences.</strong> On 16 November the US Commerce Department's Bureau of Industry and Security announced that shipping certain advanced AI chips to Malaysia, Singapore, Indonesia, Thailand and Brazil now needs a US export licence. The rule took effect on 19 November. Chips going to companies headquartered in the US are exempt if reporting conditions are met.</li>
+    <li><strong>A tax on data centres abroad.</strong> At a White House press conference on 20 November, as reported by AP, CNBC and NBC, President Trump said he wants a large tax on American companies that build data centres outside the US. This is a statement, not a law yet.</li>
+  </ol>
+  <p>Johor's data centre customers come mainly from two groups: US technology companies, and Chinese companies. The first move hits buyers linked to China. The second, if it happens, hits US buyers. That is why the market noticed.</p>
+</section>
+<section>
+  <h2>Why the US is doing this.</h2>
+  <p>AI capacity is now treated like oil: whoever has the most computing power leads. The US wants to keep that lead at home. It also wants to stop its most advanced chips reaching Chinese companies through third countries. Chinese firms were among the first to build data centre capacity in Malaysia, so Malaysia sits squarely in that picture.</p>
+</section>
+<section>
+  <h2>Three kinds of industrial land, three different outcomes.</h2>
+  <ul class="steps">
+    <li><strong>1. Data centre grade land.</strong> Large sites with the power and water supply data centres need. Impact is the most direct. Expect buyers to wait and see, and deals to take longer.</li>
+    <li><strong>2. Land priced like data centre land, without the infrastructure.</strong> This is where the pressure is greatest. Data centre grade land has traded at very roughly 40% to 70% above ordinary industrial land in Johor. If even the best sites see buyers pause, sites that do not yet meet the requirements fall further down the queue. The buyers left are factory and warehouse operators, and they pay ordinary industrial prices.</li>
+    <li><strong>3. Ordinary factories and smaller industrial lots.</strong> The buyers and tenants here are manufacturers and logistics firms, not data centre operators. Impact is the smallest.</li>
+  </ul>
+  <p class="note">The 40% to 70% range compares two different sources (JLL's 2025 average for Johor industrial land and The Star's July 2026 report on data centre grade land), so treat it as approximate.</p>
+</section>
+<section>
+  <h2>What I would think about as an owner.</h2>
+  <ul class="steps">
+    <li>Be honest about which of the three kinds your land is. Power capacity and land size decide that, not the asking price on a listing site.</li>
+    <li>If your asking price assumes a data centre buyer, ask what the land is worth to a factory or warehouse user, because that is who is buying today.</li>
+    <li>If you own an ordinary factory or warehouse, the main drivers of your rent and value have not changed: location, power, ceiling height, loading access and title.</li>
+  </ul>
+  <p>My view: data centres in Johor will not disappear, but the market may stay cool for a while. With US policy, nobody can be sure.</p>
+  <p class="note">This is my personal view, not a forecast or a guarantee.</p>
+</section>
+<section>
+  <h2>Watch the video.</h2>
+  <p>I explain this in Mandarin in <a href="https://www.facebook.com/reel/1824036028830003/">a short video on Facebook</a>.</p>
+  {cta(c, "Ask Victor about your land", "", "Hi Victor, I read your note on data centres and Johor industrial land. My land is at: ")}
+</section>'''
+
+GUIDES.append(("us-data-centre-moves-johor-industrial-land",
+               "Two US Moves in One Week: What They Mean for Johor Industrial Land",
+               "US chip export licences for Malaysia and talk of a tax on overseas data centres: which kinds of Johor industrial land are affected, by Victor Tai (REN 26739).",
+               "2026-11-22", guide_datacentre))
 
 for slug, gtitle, gdesc, gdate, gfn in GUIDES:
     k = "g:" + slug; PAGES.append(k); PATHS[k] = f"/guides/{slug}/"; BUILDERS[k] = gfn
