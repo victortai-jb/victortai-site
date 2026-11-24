@@ -60,7 +60,7 @@ CONFIG = dict(
              size="1,690 sqft · Lift · Basement parking · Fully furnished", price="RM3,900/mo"),
     ],
     reviews=[],    # (quote, "Name, business") from real clients only.
-    entity="Victor Tai (Tai Sing Thong, REN 26739) is a Johor Bahru real estate negotiator and Associate Leader at The Roof Realty (TRR), focusing on commercial and industrial property: shoplots, factories and warehouses. A former external auditor at Big 4 firm Ernst &amp; Young (EY), he explains property through numbers (rent, tax, loan and yield) and matches businesses to the space they actually need. He has been a TRR Multi Million Agent every year since 2023. He is co-founder of M-Fighters, the largest team in TRR nationwide as of 2026, and founder of The Worthy Group, which produces over RM10 million in sales commission a year. He shares JB property content on Facebook, Instagram, Xiaohongshu, TikTok, Douyin and YouTube.",
+    entity="Victor Tai (Tai Sing Thong, REN 26739) is a Johor Bahru real estate negotiator and Associate Leader at The Roof Realty (TRR), focusing on commercial and industrial property: shoplots, factories and warehouses. A former external auditor at Big 4 firm Ernst &amp; Young (EY), he explains property through numbers (rent, tax, loan and yield) and matches businesses to the space they actually need. He has been a TRR Multi Million Agent every year since 2023. He is founder of The Worthy Group, which produces over RM10 million in sales commission a year. He shares JB property content on Facebook, Instagram, Xiaohongshu, TikTok, Douyin and YouTube.",
 )
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "site")
@@ -210,7 +210,7 @@ def home(c):
     stats = [("RM10M+", "sales commission a year", "The Worthy Group, founded by Victor"),
              ("Since 2023", "TRR Multi Million Agent", "every year"),
              ("Big 4", "former external auditor", "Ernst &amp; Young (EY)"),
-             ("Largest", "team in TRR nationwide", "M-Fighters, co-founded by Victor (2026)")]
+             ("6", "platforms", "Facebook, Instagram, XHS, TikTok, Douyin, YouTube")]
     stats_html = "".join(f'<div class="stat"><b>{n}</b><span>{a}</span><small>{b}</small></div>' for n, a, b in stats)
     def tiles(rows, what):
         return "".join(
@@ -383,7 +383,6 @@ def about(c):
     <div><dt>Education</dt><dd>Degree in accounting</dd></div>
     <div><dt>Before property</dt><dd>External auditor, Ernst &amp; Young (EY), a Big 4 firm</dd></div>
     <div><dt>Track record</dt><dd>TRR Multi Million Agent (MMA) every year since 2023</dd></div>
-    <div><dt>M-Fighters</dt><dd>Co-founder. The largest team in TRR nationwide as of 2026</dd></div>
     <div><dt>The Worthy Group</dt><dd>Founder. A TRR sales team producing over RM10 million in sales commission a year</dd></div>
     <div><dt>Content</dt><dd>JB property content on Facebook, Instagram, Xiaohongshu, TikTok, Douyin and YouTube</dd></div>
   </dl>
@@ -437,7 +436,7 @@ def join(c):
     <p class="eyebrow">{c.t("Join The Worthy Group", "加入 The Worthy Group")}</p>
     <h1>{c.t("A property sales team in Johor Bahru that runs on systems", "新山一个靠系统做事的房地产销售团队")}</h1>
     <p class="lead">{c.t(
-      "The Worthy Group (TWG) is a sales team within The Roof Realty in Johor Bahru, founded by Victor Tai (Tai Sing Thong), and produces over RM10 million in sales commission a year. TWG is part of M-Fighters, the largest team in TRR nationwide as of 2026. What sets it apart is how well the team's systems support each agent.",
+      "The Worthy Group (TWG) is a sales team within The Roof Realty in Johor Bahru, founded by Victor Tai (Tai Sing Thong), and produces over RM10 million in sales commission a year. What sets it apart is how well the team's systems support each agent.",
       "The Worthy Group（TWG）是新山 The Roof Realty 旗下的销售团队，由 Victor Tai（Tai Sing Thong）联合创办。我们不比人数，比的是系统能给每个 agent 多少支持。")}</p>
   </div>
 </section>
@@ -538,7 +537,7 @@ META = {
     ("en", "space"): ("Find a Factory, Warehouse or Shoplot in Johor Bahru | Victor Tai",
                       "Looking for a factory, warehouse or shoplot to rent or buy in Johor Bahru? Send your requirement to Victor Tai (Tai Sing Thong) of The Roof Realty, plus six things to check before you sign."),
     ("en", "about"): ("About Victor Tai (Tai Sing Thong) | The Roof Realty, Johor Bahru",
-                      "Victor Tai (Tai Sing Thong), REN 26739: former EY external auditor, TRR Associate Leader, Multi Million Agent every year since 2023, co-founder of M-Fighters and founder of The Worthy Group."),
+                      "Victor Tai (Tai Sing Thong), REN 26739: former EY external auditor, TRR Associate Leader, Multi Million Agent every year since 2023, founder of The Worthy Group."),
     ("zh", "about"): ("关于 Victor Tai（Tai Sing Thong）｜新山 The Roof Realty",
                       "Victor Tai（Tai Sing Thong）的背景：会计系毕业，前 EY auditor，TRR Multi Million Agent 2025，The Worthy Group 联合创办人。"),
     ("en", "join"): ("Join The Worthy Group | Property Agent Team in Johor Bahru",
@@ -794,8 +793,7 @@ def person_ld():
          "description": CONFIG["entity"].replace("&amp;", "&"),
          "worksFor": {"@type": "RealEstateAgent", "name": "The Roof Realty",
                       "address": {"@type": "PostalAddress", "addressLocality": "Johor Bahru", "addressRegion": "Johor", "addressCountry": "MY"}},
-         "memberOf": [{"@type": "Organization", "name": "M-Fighters"},
-                      {"@type": "Organization", "name": "The Worthy Group", "url": CONFIG["domain"] + "/join/"}],
+         "memberOf": [{"@type": "Organization", "name": "The Worthy Group", "url": CONFIG["domain"] + "/join/"}],
          "alumniOf": {"@type": "Organization", "name": "Ernst & Young (EY)"},
          "award": "TRR Multi Million Agent, every year since 2023",
          "telephone": "+60177757229",
@@ -810,7 +808,7 @@ def person_ld():
 
 def org_ld():
     return {"@context": "https://schema.org", "@type": "Organization", "name": "The Worthy Group", "alternateName": "TWG",
-            "url": CONFIG["domain"] + "/join/", "description": "A property sales team within The Roof Realty, Johor Bahru, producing over RM10 million in sales commission a year. Part of M-Fighters.",
+            "url": CONFIG["domain"] + "/join/", "description": "A property sales team within The Roof Realty, Johor Bahru, producing over RM10 million in sales commission a year.",
             "founder": {"@id": CONFIG["domain"] + "/#victor-tai"},
             "parentOrganization": {"@type": "RealEstateAgent", "name": "The Roof Realty"},
             "address": {"@type": "PostalAddress", "addressLocality": "Johor Bahru", "addressRegion": "Johor", "addressCountry": "MY"}}

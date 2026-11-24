@@ -22,7 +22,7 @@ def home(c):
     stats = [("RM10M+", "sales commission a year", "The Worthy Group, founded by Victor"),
              ("Since 2023", "TRR Multi Million Agent", "every year"),
              ("Big 4", "former external auditor", "Ernst &amp; Young (EY)"),
-             ("Largest", "team in TRR nationwide", "M-Fighters, co-founded by Victor (2026)")]
+             ("6", "platforms", "Facebook, Instagram, XHS, TikTok, Douyin, YouTube")]
     stats_html = "".join(f'<div class="stat"><b>{n}</b><span>{a}</span><small>{b}</small></div>' for n, a, b in stats)
     areas_html = "".join(
         f'<a class="area" href="{wa(f"Hi Victor, I found you through your website. I am looking for a factory or warehouse in {n}.")}">'
