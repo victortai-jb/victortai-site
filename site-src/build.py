@@ -27,6 +27,7 @@ CONFIG = dict(
         ("YouTube", "@VictorLinDao92", "https://www.youtube.com/@VictorLinDao92"),
         ("Xiaohongshu", "小红书", "https://xhslink.cn/m/2DWDDkfRTQM"),
         ("Douyin", "抖音", "https://www.douyin.com/user/MS4wLjABAAAAfKpoUUaOoF7L4MM144zqRURAXpMu5CcbGpF7_7wQWyM"),
+        ("Google", "5.0 ★ reviews", "https://www.google.com/maps?cid=2041028174220568408"),
     ],
     # featured videos: Facebook reel id (personal profile), title, note. Cover image: assets/v/fb-<id>.jpg
     videos=[
@@ -59,7 +60,17 @@ CONFIG = dict(
         dict(kind="com", deal="For rent", area="Southkey", title="Office, Mosaic Block F, Level 2",
              size="1,690 sqft · Lift · Basement parking · Fully furnished", price="RM3,900/mo"),
     ],
-    reviews=[],    # (quote, "Name, business") from real clients only.
+    reviews=[    # (quote, "Name, business") from real clients only, copied word for word from Google reviews.
+        ("Victor is a fantastic agent! He is a reliable, trustworthy, helpful and efficient person. He has been taking care of my property for the last 9 years &amp; I am very pleased with his services and appreciate very much for his support all these years.",
+         "Fina Salim, property owner · Google review"),
+        ("Victor is a professional property agent providing exceptional good service. He is reliable and trustworthy and I&#39;ve recommended him to act as agent for several friends with properties in Johor.",
+         "Kim Siang Soh, property owner · Google review"),
+        ("一位非常尽责的房屋代理！有活力充满对生活的热忱，所以可以放心把产业买卖交托给他！",
+         "Hui Niap Gey · Google review"),
+    ],
+    google=dict(rating="5.0", count=10, as_of="28 Nov 2026",   # Google Business Profile "Victor Tai"; update when the count changes
+                url="https://www.google.com/maps?cid=2041028174220568408",
+                write="https://g.page/r/CVgn-4RPMFMcEAE/review"),
     entity="Victor Tai (Tai Sing Thong, REN 26739) is a Johor Bahru real estate negotiator and Associate Leader at The Roof Realty (TRR), focusing on commercial and industrial property: shoplots, factories and warehouses. A former external auditor at Big 4 firm Ernst &amp; Young (EY), he explains property through numbers (rent, tax, loan and yield) and matches businesses to the space they actually need. He has been a TRR Multi Million Agent every year since 2023. He is founder of The Worthy Group, which produces over RM10 million in sales commission a year. He shares JB property content on Facebook, Instagram, Xiaohongshu, TikTok, Douyin and YouTube.",
 )
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -251,7 +262,11 @@ def home(c):
     how_html = "".join(f"<article><h3>{h}</h3><p>{p}</p></article>" for h, p in HOW_I_WORK)
     if CONFIG["reviews"]:
         rev = "".join(f'<figure class="review"><blockquote>{q}</blockquote><figcaption>{who}</figcaption></figure>' for q, who in CONFIG["reviews"])
-        reviews = f'<section><h2>What clients say.</h2><div class="reviews">{rev}</div></section>'
+        g = CONFIG["google"]; rt, cnt = g["rating"], g["count"]
+        gline = (f'<p class="lead center2">{c.t(f"Rated {rt} ★ on Google from {cnt} client reviews.", f"Google 评分 {rt} ★，共 {cnt} 位客户评价。")}</p>'
+                 f'<p class="cta"><a class="textlink" href="{g["url"]}" rel="noopener">{c.t("Read all reviews on Google", "在 Google 看全部评价")} ›</a>'
+                 f'<a class="textlink" href="{g["write"]}" rel="noopener">{c.t("Worked with Victor? Leave a review", "合作过？给 Victor 留个评价")} ›</a></p>')
+        reviews = f'<section><h2>{c.t("What clients say.", "客户怎么说。")}</h2>{gline}<div class="reviews">{rev}</div></section>'
     elif c.preview:
         reviews = f'<section><h2>What clients say.</h2><div class="reviews"><figure class="review"><blockquote>{todo("Real client reviews go here")}</blockquote><figcaption>2 to 4 reviews in the client\'s own words, with their business type. Hidden until Victor provides them.</figcaption></figure></div></section>'
     else:
